@@ -1,0 +1,50 @@
+﻿{
+"projects" : [
+    {
+        "name": "Proximus",
+        "environment" : {
+            "name": "QA",
+            "baseUrl":"http://172.30.100.33:20000/"
+        },
+        "tests" : [
+            {
+                "testId":"TC1",
+                "name":"Create Company",
+                "steps":[
+                    {
+                        "action":"url",
+                        "target":"Secure/Company/Home/AddCompanyWizard.aspx"
+                    }
+                ]
+            },
+            {
+                "testId": "TC2",
+                "name": "SID Activation",
+                "dependsOn":["TC1"],
+                "parameters":[
+                    "CompanyID"
+                ],
+                "steps": [
+                    {
+                        "action": "url",
+                        "target":"Secure/Company/Home/CompanyHome.aspx?companyID=9"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_LeftNavTree > ul > li:nth-child(5) a:first"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_LeftNavTree > ul > li:nth-child(5) ul li:nth-child(2) a:first"
+                    },
+                    {
+                        "action": "write",
+                        "target": "#ctl00_RightPlaceHolder_ddlActivateTo",
+                        "value": "Active"
+                    }
+                ]
+            }
+        ]
+    }
+]
+}

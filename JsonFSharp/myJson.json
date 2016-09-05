@@ -1,0 +1,26 @@
+﻿{
+    "projects" : [
+        {
+            "name": "Proximus",
+            "environment" : {
+                "name": "QA",
+                "baseUrl": "http://172.30.100.33:20000/"
+            },
+            "tests" : [
+                {
+                    "testId": "TC1",
+                    "name": "Test Case Name",
+                    "dependsOn":["TC1"],
+                    "parameters": ["param1"],
+                    "steps": [
+                        {
+                            "action": "click",
+                            "target":"#button1",
+                            "value":"text"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
