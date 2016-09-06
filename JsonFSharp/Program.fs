@@ -1,4 +1,5 @@
-﻿open FSharp.Data
+﻿module Kore.AutoTest
+open FSharp.Data
 open System
 open canopy
 open runner
@@ -24,7 +25,8 @@ let assignParam text parameters=
 let validateParameters testParams (parameters:Dictionary<string,string>) = 
     let results = [
         for p in testParams do
-            if parameters.[p] = null then
+
+            if not (parameters.ContainsKey(p)) then
                 parameters.Add(p,"")
                 yield false
             else
@@ -49,10 +51,11 @@ let rec runTest (testId:string) (tests:JsonProvider<"myJson.json">.Test[]) (para
         |"write" -> s.Target << s.Value
         |"read" -> waitFor (fun _-> (elements s.Target).Length = 1)
         |"record" -> 
+            let readValue = read s.Value
             if not (parameters.ContainsKey(s.Target)) then
-                parameters.Add(s.Target, (read s.Value))
+                parameters.Add(s.Target, readValue)
             else
-                parameters.[s.Target] <- s.Value
+                parameters.[s.Target] <- readValue
         | _ -> ()
         )
 

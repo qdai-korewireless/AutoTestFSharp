@@ -16,10 +16,6 @@
                         "target": "Secure/Company/Home/companyhome.aspx?companyID=137883"
                     },
                     {
-                        "action": "read",
-                        "target": "#ctl00_CompanySnapshot_SnapshotCompanyID"
-                    },
-                    {
                         "action":"record",
                         "target":"CompanyID",
                         "value": "#ctl00_CompanySnapshot_SnapshotCompanyID"
