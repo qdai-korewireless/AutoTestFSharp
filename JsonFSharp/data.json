@@ -1,7 +1,7 @@
 ﻿{
 "projects" : [
     {
-        "name": "Proximus",
+        "name": "SID",
         "environment" : {
             "name": "QA",
             "baseUrl":"http://172.30.100.33:20000/"
@@ -9,11 +9,20 @@
         "tests" : [
             {
                 "testId":"TC1",
-                "name":"Create Company",
+                "name":"Find Company",
                 "steps":[
                     {
-                        "action":"url",
-                        "target":"Secure/Company/Home/AddCompanyWizard.aspx"
+                        "action": "url",
+                        "target": "Secure/Company/Home/companyhome.aspx?companyID=137883"
+                    },
+                    {
+                        "action": "read",
+                        "target": "#ctl00_CompanySnapshot_SnapshotCompanyID"
+                    },
+                    {
+                        "action":"record",
+                        "target":"CompanyID",
+                        "value": "#ctl00_CompanySnapshot_SnapshotCompanyID"
                     }
                 ]
             },
@@ -27,7 +36,7 @@
                 "steps": [
                     {
                         "action": "url",
-                        "target":"Secure/Company/Home/CompanyHome.aspx?companyID=9"
+                        "target":"Secure/Company/Home/CompanyHome.aspx?companyID=#{CompanyID}"
                     },
                     {
                         "action": "click",

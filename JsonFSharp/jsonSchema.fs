@@ -2,4 +2,4 @@
 
 open FSharp.Data
 
-type Simple = JsonProvider<"myJson.json">
+type AutoTestSchema = JsonProvider<"myJson.json">
