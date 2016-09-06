@@ -1,0 +1,59 @@
+﻿{
+"projects" : [
+    {
+        "name": "SID",
+        "environment" : {
+            "name": "QA",
+            "baseUrl":"http://172.30.100.33:20000/"
+        },
+        "tests" : [
+            {
+                "testId":"TC1",
+                "name":"Find Company",
+                "steps":[
+                    {
+                        "action": "url",
+                        "target": "Secure/Company/Home/companyhome.aspx?companyID=137883"
+                    },
+                    {
+                        "action": "read",
+                        "target": "#ctl00_CompanySnapshot_SnapshotCompanyID"
+                    },
+                    {
+                        "action":"record",
+                        "target":"CompanyID",
+                        "value": "#ctl00_CompanySnapshot_SnapshotCompanyID"
+                    }
+                ]
+            },
+            {
+                "testId": "TC2",
+                "name": "SID Activation",
+                "dependsOn":["TC1"],
+                "parameters":[
+                    "CompanyID"
+                ],
+                "steps": [
+                    {
+                        "action": "url",
+                        "target":"Secure/Company/Home/CompanyHome.aspx?companyID=#{CompanyID}"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_LeftNavTree > ul > li:nth-child(5) a:first"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_LeftNavTree > ul > li:nth-child(5) ul li:nth-child(2) a:first"
+                    },
+                    {
+                        "action": "write",
+                        "target": "#ctl00_RightPlaceHolder_ddlActivateTo",
+                        "value": "Active"
+                    }
+                ]
+            }
+        ]
+    }
+]
+}

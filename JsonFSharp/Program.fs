@@ -3,9 +3,14 @@ open System
 open canopy
 open runner
 open jsonSchema
+open Common
 open System.Collections.Generic
 
-let data = System.IO.File.ReadAllText("data.json")
+
+configuration.chromeDir <- executingDir()
+configuration.ieDir <- executingDir()
+
+let data = System.IO.File.ReadAllText(@"Data\data.json")
 
 let proximusTests = AutoTestSchema.Parse(data)
 
