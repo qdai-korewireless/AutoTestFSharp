@@ -1,4 +1,4 @@
-﻿module Kore.AutoTest
+﻿module Kore.AutoTest.Program
 open FSharp.Data
 open System
 open canopy
@@ -6,7 +6,7 @@ open runner
 open jsonSchema
 open Common
 open System.Collections.Generic
-
+open System.Text.RegularExpressions
 
 configuration.chromeDir <- executingDir()
 configuration.ieDir <- executingDir()
@@ -17,27 +17,7 @@ let proximusTests = AutoTestSchema.Parse(data)
 
 start chrome
 
-let baseUrl = proximusTests.Projects.[0].Environment.BaseUrl
-
-let assignParam text parameters= 
-    "Secure/Company/Home/CompanyHome.aspx?companyID=137883"
-
-let validateParameters testParams (parameters:Dictionary<string,string>) = 
-    let results = [
-        for p in testParams do
-
-            if not (parameters.ContainsKey(p)) then
-                parameters.Add(p,"")
-                yield false
-            else
-                if not (parameters.[p] = "") then
-                    yield true
-                else
-                    yield false
-        ]
-
-    results |> Seq.forall (fun(r) -> r)
-
+let baseUrl = getBaseUrl proximusTests.Projects.[0]
 let rec runTest (testId:string) (tests:JsonProvider<"myJson.json">.Test[]) (parameters:Dictionary<string,string>) = 
     let test = tests |> Seq.filter (fun(t) -> t.TestId = testId) |> Seq.head
             
