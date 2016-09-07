@@ -13,7 +13,28 @@
                 "steps":[
                     {
                         "action": "url",
-                        "target": "Secure/Company/Home/companyhome.aspx?companyID=137883"
+                        "target": "Secure/welcome.aspx"
+                    },
+                    {
+                        "action": "write",
+                        "target": "#ctl00_uxQuickSearch1_QuickSearchQuery",
+                        "value": "crc11 2016"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_uxQuickSearch1_QuickSearchLaunch"
+                    },
+                    {
+                        "action": "click",
+                        "target": ".rgHeader:nth-child(18) a"
+                    },
+                    {
+                        "action": "click",
+                        "target": ".rgHeader:nth-child(18) a"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_RightPlaceHolder_grdCompany_ctl00__0 td:first-child a"
                     },
                     {
                         "action":"record",
@@ -46,6 +67,40 @@
                         "action": "write",
                         "target": "#ctl00_RightPlaceHolder_ddlActivateTo",
                         "value": "Active"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_RightPlaceHolder_btnSearch"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_RightPlaceHolder_grdSIMList_ctl00_ctl04_ClientSelectColumnSelectCheckBox"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_RightPlaceHolder_btnSubmit"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_RightPlaceHolder_featureSelectionPanel_dataServiceCheckbox"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_RightPlaceHolder_featureSelectionPanel_dataSelector_featureChecklist_0"
+                    },
+                    {
+                        "action": "write",
+                        "target": "#ctl00_RightPlaceHolder_planSelector_dataPlanSelection",
+                        "value": "RM PXS Data Plan - 10M MB"
+                    },
+                    {
+                        "action": "write",
+                        "target": "#ctl00_RightPlaceHolder_planSelector_smsPlanSelection",
+                        "value": "PlanDevice - Natl 5 SMS"
+                    },
+                    {
+                        "action": "click",
+                        "target": "#ctl00_RightPlaceHolder_btnSave"
                     }
                 ]
             }
