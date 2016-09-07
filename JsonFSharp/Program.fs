@@ -11,13 +11,13 @@ open System.Text.RegularExpressions
 configuration.chromeDir <- executingDir()
 configuration.ieDir <- executingDir()
 
-let data = System.IO.File.ReadAllText(@"Data\data.json")
+let raw = System.IO.File.ReadAllText(@"Data\data.json")
+let obj = AutoTestSchema.Parse(raw)
+let parameters = new Dictionary<string,string>()
+let firstProject = obj.Projects.[0]
+let tests = firstProject.Tests
+let baseUrl = getBaseUrl firstProject
 
-let proximusTests = AutoTestSchema.Parse(data)
-
-start chrome
-
-let baseUrl = getBaseUrl proximusTests.Projects.[0]
 let rec runTest (testId:string) (tests:JsonProvider<"myJson.json">.Test[]) (parameters:Dictionary<string,string>) = 
     let test = tests |> Seq.filter (fun(t) -> t.TestId = testId) |> Seq.head
             
@@ -39,15 +39,15 @@ let rec runTest (testId:string) (tests:JsonProvider<"myJson.json">.Test[]) (para
         | _ -> ()
         )
 
-let parameters = new Dictionary<string,string>()
-let tcs = proximusTests.Projects.[0].Tests
-
-let runTests (tests:JsonProvider<"myJson.json">.Test[]) (parameters:Dictionary<string,string>) = 
+let initTests (tests:JsonProvider<"myJson.json">.Test[]) (parameters:Dictionary<string,string>) = 
     tests |> Seq.iter (fun(t) ->
         t.Name &&&& fun _->
             runTest t.TestId tests parameters) 
 
-runTests tcs parameters
+initTests tests parameters
+
+
+start chrome
 
 run()
     
