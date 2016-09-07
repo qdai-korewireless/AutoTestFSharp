@@ -258,3 +258,5 @@ paket-files/
 
 # CodeRush
 .cr/
+#drivers
+!**/drivers/*.exe
